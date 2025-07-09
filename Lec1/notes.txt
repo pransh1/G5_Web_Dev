@@ -1,0 +1,174 @@
+✅ 1. Single-thread vs Multi-thread
+Single-threaded: JS executes one task at a time (main thread).
+
+Multi-threaded: True parallel execution using Web Workers (in browsers).
+
+🔹 Web Workers:
+Run JS in background thread, avoids UI freezing.
+Used for:
+
+CPU-heavy tasks (loops, image processing, parsing)
+
+✅ 2. Async in JS (Promises, async/await, setTimeout)
+Used to handle non-blocking tasks:
+
+Network requests
+
+Background timers
+
+Large calculations (if with Web Worker)
+
+File reading/parsing (CSV/JSON)
+
+✅ 3. What is a Thread?
+A thread is a path of execution.
+
+JS uses one main thread.
+
+Web Workers create extra threads for heavy tasks.
+
+✅ 4. Horizontal vs Vertical Scaling
+Type	Meaning
+Vertical	Upgrade one server's CPU/RAM
+Horizontal	Add more servers (Node.js: clustering, PM2, load balancing)
+
+✅ 5. Latency vs Throughput
+Term	Meaning
+Latency	Time to handle one request
+Throughput	Total requests handled per second
+
+✅ 6. JS: Compiled or Interpreted?
+Originally interpreted
+
+Now uses JIT (Just-In-Time) compilation via engines like V8
+
+✅ 7. JS: Sync or Async?
+JS is synchronous by default
+
+Becomes asynchronous using:
+
+setTimeout, fetch, Promise, async/await
+
+Managed by the Event Loop
+
+🔁 Difference: Sync vs Async vs Multithreading
+Concept	Parallel?	Blocking?	JS Example
+Synchronous	❌ No	✅ Yes	Regular code
+Asynchronous	✅ Looks like	❌ No	setTimeout, fetch
+Multithreading	✅ Yes	❌ Depends	Web Workers
+
+🔹 JavaScript Hoisting
+Hoisting: JS moves declarations to top of scope.
+
+Only works for:
+
+var (value = undefined)
+
+Function declarations
+
+🔹 Temporal Dead Zone (TDZ)
+Applies to let and const
+
+Accessing before initialization = ❌ ReferenceError
+
+js
+Copy
+Edit
+console.log(x); // ❌
+let x = 10;
+🔹 Arrow Functions
+Shorter syntax using =>
+
+No own this, arguments, or super
+
+Lexically bound this
+
+js
+Copy
+Edit
+const add = (a, b) => a + b;
+Feature	Arrow Function	Regular Function
+this	Lexical (outer)	Dynamic (depends)
+Hoisting	❌ Not hoisted	✅ Hoisted
+Syntax	Concise	Traditional
+
+🔹 Function Expression
+A function assigned to a variable
+
+Not hoisted like declarations
+
+Can be anonymous or named
+
+js
+Copy
+Edit
+const greet = function(name) {
+  return `Hello, ${name}`;
+};
+🔹 Anonymous Functions
+Functions with no name
+
+Common in callbacks, IIFEs
+
+js
+Copy
+Edit
+setTimeout(function() {
+  console.log("Hello");
+}, 1000);
+✅ Summary Table
+Concept	Description	Hoisted?
+Hoisting	Moves declarations (not initializations)	✅ var, fn
+TDZ	Accessing let/const before init → error	❌ Error
+Arrow Function	Short, no this/arguments	❌ Not hoisted
+Anonymous Func	Used in expressions/callbacks	❌ Depends
+Function Expr	Function assigned to a variable	❌ Not hoisted
+
+🔄 this Behavior Examples
+js
+Copy
+Edit
+function show() {
+  console.log(this); // Global (window in browser)
+}
+
+const user = {
+  name: "Palkit",
+  sayHi() {
+    console.log(this.name); // "Palkit"
+  }
+};
+
+const user2 = {
+  name: "Ravi",
+  greet: () => {
+    console.log(this.name); // undefined (arrow uses outer `this`)
+  }
+};
+
+function greet() {
+  console.log(this.name);
+}
+const person = { name: "Neha" };
+greet.call(person); // "Neha"
+
+
+
+
+Final Closure Recap
+Closure is:
+➤ Function + Its outer scope (preserved in Heap)
+
+Why Closure works:
+➤ Because inner function still has reference to outer variable, JavaScript's engine keeps it in memory (heap)
+
+JavaScript Engine handles:
+➤ Stack for execution
+➤ Heap for variable/closure storage
+➤ Garbage Collection to remove unused variables
+
+👇 Ask Yourself These to Spot Closure:
+
+Is function returned from another function?	➤ Closure!
+Is function using variable from parent?	➤ Closure!
+Is that parent function already done?	➤ Closure!
