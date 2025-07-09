@@ -1,0 +1,19 @@
+async/await
+Simplifies working with Promises.
+Waits for the Promise to resolve before moving to the next line.
+Must be used inside an async function.
+
+Event Capturing
+Top to bottom event flow (document → element).
+Also known as "capture phase."
+Use addEventListener('click', fn, true) to enable capturing.
+
+Event Bubbling
+Bottom to top event flow (element → document).
+Default event propagation in the DOM.
+Handled with addEventListener('click', fn) (default false).
+
+call() Function
+Invokes a function with a specific this value and arguments.
+Syntax: func.call(thisArg, arg1, arg2, ...)
+Used to borrow methods or set context dynamically.
